@@ -7,9 +7,6 @@ on:
   push:
     branches:
       - main
-  pull:
-    branches:
-      -main
   workflow_dispatch:
 
 jobs:
@@ -27,6 +24,8 @@ jobs:
       - name: npm install, build, and test
         run: |
           npm install
+          npm run build --if-present
+          npm run test --if-present
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -53,5 +52,5 @@ jobs:
         with:
           app-name: 'SDALab'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B7723B802B0A4152A8ACEA95B46BC9E1 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_564F886306344874A15FB4BE36968AA6 }}
           package: .
